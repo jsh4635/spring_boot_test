@@ -28,6 +28,8 @@ public class Question {
 
     private LocalDateTime createdDate;
 
+    private LocalDateTime updatedDate;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
 

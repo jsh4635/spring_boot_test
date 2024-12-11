@@ -50,4 +50,11 @@ public class QuestionService {
         question.setAuthor(user);
         this.questionRepository.save(question);
     }
+
+    public void update(Question question, String subject, String content){
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setUpdatedDate(LocalDateTime.now());
+        this.questionRepository.save(question);
+    }
 }
