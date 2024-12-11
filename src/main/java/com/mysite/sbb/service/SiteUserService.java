@@ -1,10 +1,13 @@
 package com.mysite.sbb.service;
 
+import com.mysite.sbb.DataNotFoundException;
 import com.mysite.sbb.entity.SiteUser;
 import com.mysite.sbb.repository.SiteUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author shjung
@@ -23,5 +26,14 @@ public class SiteUserService {
         siteUser.setEmail(email);
         siteUser.setPassword(passwordEncoder.encode(password));
         return siteUserRepository.save(siteUser);
+    }
+
+    public SiteUser getUser(String username) {
+        Optional<SiteUser> siteUser = this.siteUserRepository.findByUsername(username);
+        if(siteUser.isPresent()){
+            return siteUser.get();
+        }else{
+            throw new DataNotFoundException("siteuser not found");
+        }
     }
 }
