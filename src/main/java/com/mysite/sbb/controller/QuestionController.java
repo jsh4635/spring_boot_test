@@ -74,6 +74,8 @@ public class QuestionController {
         return "question_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/update/{id}")
     public String questionUpdate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal, @PathVariable("id") Integer id) {
         if(bindingResult.hasErrors()){
             return "question_form";
@@ -85,5 +87,16 @@ public class QuestionController {
         }
         this.questionService.update(question, questionForm.getSubject(), questionForm.getContent());
         return String.format("redirect:/question/detail/%s", id);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
+        Question question = this.questionService.getQuestion(id);
+        if(!question.getAuthor().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+        this.questionService.delete(question);
+        return "redirect:/";
     }
 }
