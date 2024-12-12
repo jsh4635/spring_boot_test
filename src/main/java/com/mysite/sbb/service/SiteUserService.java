@@ -1,6 +1,6 @@
 package com.mysite.sbb.service;
 
-import com.mysite.sbb.DataNotFoundException;
+import com.mysite.sbb.exceptions.DataNotFoundException;
 import com.mysite.sbb.entity.SiteUser;
 import com.mysite.sbb.repository.SiteUserRepository;
 import lombok.RequiredArgsConstructor;

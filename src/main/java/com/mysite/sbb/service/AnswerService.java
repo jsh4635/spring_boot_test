@@ -1,6 +1,6 @@
 package com.mysite.sbb.service;
 
-import com.mysite.sbb.DataNotFoundException;
+import com.mysite.sbb.exceptions.DataNotFoundException;
 import com.mysite.sbb.entity.Answer;
 import com.mysite.sbb.entity.Question;
 import com.mysite.sbb.entity.SiteUser;
