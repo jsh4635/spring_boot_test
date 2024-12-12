@@ -21,13 +21,13 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    public void create(Question question, String content, SiteUser author) {
+    public Answer create(Question question, String content, SiteUser author) {
         Answer answer = new Answer();
         answer.setQuestion(question);
         answer.setContent(content);
         answer.setCreatedDate(LocalDateTime.now());
         answer.setAuthor(author);
-        this.answerRepository.save(answer);
+        return this.answerRepository.save(answer);
     }
 
     public Answer getAnswer(Integer id) {
